@@ -49,7 +49,7 @@ function executarOperação() {
         default:
           result = numeroAtual;
       }
-  
+
       history.textContent += operadorAtual + ' = ';
       operadorAtual = result.toString();
       display.value = operadorAtual;
@@ -61,3 +61,17 @@ function executarOperação() {
     operador = '';
     history.textContent += operadorAtual;
   }
+
+  document.addEventListener('keydown', function(event) {
+    if (event.key >= '0' && event.key <= '9') {
+      add_numero(parseInt(event.key));
+    } else if (event.key === '.') {
+      add_numero('.');
+    } else if (event.key === 'Enter' || event.key === '=') {
+      total();
+    } else if (event.key === 'Delete') {
+      limpar();
+    } else if (event.key === '+' || event.key === '-' || event.key === '*' || event.key === '/') {
+      add_operador(event.key);
+    }
+  });
